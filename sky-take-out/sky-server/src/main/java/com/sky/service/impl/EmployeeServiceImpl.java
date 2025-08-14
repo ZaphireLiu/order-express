@@ -1,5 +1,6 @@
 package com.sky.service.impl;
 
+import com.sky.utils.PasswordUtil;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.EmployeeLoginDTO;
@@ -39,8 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         //密码比对
-        // TODO 后期需要进行md5加密，然后再进行比对
-        if (!password.equals(employee.getPassword())) {
+        // NOTE 需要进行md5加密，然后再进行比对->改成了sha256加盐
+        if (!PasswordUtil.encryptPassword(password).equals(employee.getPassword())) {
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
