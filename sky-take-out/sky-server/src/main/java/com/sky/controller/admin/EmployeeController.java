@@ -97,4 +97,18 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 切换员工账号状态
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}") // ? 大概是直接用状态分成了俩api，怪哎
+    @ApiOperation("切换账号状态")
+    public Result switchStatus(@PathVariable("status") Integer status, Long id) {
+        log.info("账号状态切换 - ID: {}, 状态: {}", id, status);
+        employeeService.switchStatus(status, id);
+        return Result.success();
+    }
 }
