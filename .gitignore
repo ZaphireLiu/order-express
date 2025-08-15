@@ -25,3 +25,5 @@ replay_pid*
 
 # nginx files for running frontend server
 /nginx-1.20.2/*
+# local documents
+/local-docs/*
