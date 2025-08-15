@@ -1,7 +1,11 @@
 package com.sky.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
+import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.result.PageResult;
 import com.sky.utils.PasswordUtil;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -75,6 +80,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         // employee.setUpdateUser(userID);
 
         employeeMapper.insert(employee);
+    }
+
+    public PageResult pageQuery(EmployeePageQueryDTO pageQueryDTO) {
+        PageHelper.startPage(pageQueryDTO.getPage(), pageQueryDTO.getPageSize());
+
+        Page<Employee> page = employeeMapper.pageQuery(pageQueryDTO); // 后续定义
+        // 返回的是Page<Employee>, 再转换一下
+        long total = page.getTotal();
+        List<Employee> records = page.getResult();
+
+        return new PageResult(total, records);
     }
 
 }
