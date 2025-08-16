@@ -30,3 +30,15 @@ ai认为是spring boot内部将这个名称和dto对象做了绑定：
 ## SQL位置选择
 
 比较简单的可以用注解，对于动态条件/多表查询等最好还是放xml
+
+## 动态PostMapping
+
+``` java
+    @PostMapping("/status/{status}") // ? 大概是直接用状态分成了俩api，怪哎
+    @ApiOperation("切换账号状态")
+    public Result switchStatus(@PathVariable("status") Integer status, Long id) {
+        log.info("账号状态切换 - ID: {}, 状态: {}", id, status);
+        employeeService.switchStatus(status, id);
+        return Result.success();
+    }
+```
