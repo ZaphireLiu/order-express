@@ -73,11 +73,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         BeanUtils.copyProperties(employeeDTO, employee);
         employee.setStatus(StatusConstant.ENABLE); // 正常, 尽量用常量类以防止后期修改
         employee.setPassword(PasswordUtil.encryptPassword(PasswordConstant.DEFAULT_PASSWORD));
-        employee.setCreateTime(LocalDateTime.now());
+        // 通过注解填充
+        // employee.setCreateTime(LocalDateTime.now());
         // employee.setUpdateTime(LocalDateTime.now());
         // Done 修改下面的创建人/修改人
-        Long userID = BaseContext.getCurrentId();
-        employee.setCreateUser(userID);
+        // Long userID = BaseContext.getCurrentId();
+        // employee.setCreateUser(userID);
         // employee.setUpdateUser(userID);
 
         employeeMapper.insert(employee);
@@ -112,8 +113,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
         employee.setPassword(null);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 通过注解自动填充
+        // employee.setUpdateTime(LocalDateTime.now());
+        // employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 
