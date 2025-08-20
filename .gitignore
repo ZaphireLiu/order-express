@@ -27,3 +27,5 @@ replay_pid*
 /nginx-1.20.2/*
 # local documents
 /local-docs/*
+# config files
+application-*.y*ml
