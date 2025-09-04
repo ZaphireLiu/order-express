@@ -84,4 +84,10 @@ public interface OrderService {
      * @param ordersRejectionDTO
      */
     void rejection(OrdersRejectionDTO ordersRejectionDTO) throws Exception;
+
+    /**
+     * 用户催单
+     * @param id
+     */
+    void reminder(Long id);
 }
